@@ -4,7 +4,7 @@ This Git Repo has been created to figure out why an ImageView will not load a pi
 Code snippets from the project:
 
 ### Launching the camera / gallery
-
+```Java
     //Launch the gallery
     
     Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -34,8 +34,9 @@ Code snippets from the project:
     imageURI = Uri.fromFile(photo);
    
     startActivityForResult(getCameraImage, CAMERA);
-    
+```    
 ### Handling the response in onActivityResult
+```Java
     switch (requestCode){
     
         case GALLERY: 
@@ -47,7 +48,7 @@ Code snippets from the project:
             imageView.setImageURI(imageURI); 
             break;
     }
-
+```
 ##Results
 
 When testing this project on a Samsung Galaxy S4 running Android 4.2.2 the ImageView turns blank when being set by a URI.
