@@ -67,4 +67,38 @@ GenyMotion 2.4.0/4.4.4 Before                  |  GenyMotion 2.4.0/4.4.4 After
 :-------------------------:|:-------------------------:
 ![GenyMotion 2.4/0/4.4.4 Before](http://i.imgur.com/EJJQlqG.png "S4 Before")  |  ![GenyMotion 2.4.0/4.4.4 After](http://i.imgur.com/KDUUjgl.png "S4 After")
 
+#Solutions tried:
+
+These have all failed.
+
+##SetImageURI()
+
+```Java
+
+imageView.setImageURI(imageURI);
+```
+
+##Picasso
+
+```Java
+
+Picasso.with(context)
+    .load(imageURI)
+    .into(imageView);
+
+```
+
+##Bitmap Factory
+
+```Java
+try {
+    Bitmap bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(imageURI));
+    imageView.setImageBitmap(bitmap);
+} catch (FileNotFoundException e) {
+    e.printStackTrace();
+}
+```
+
+
+
 
