@@ -1,6 +1,5 @@
 package uk.co.aj9.samsungs4imagetest;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,15 +13,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class MainActivity extends ActionBarActivity {
-
+public class PicassoActivity extends ActionBarActivity {
     //Views
 
     Button btn;
@@ -85,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
                                             cameraFolder = new File(android.os.Environment.getExternalStorageDirectory(),
                                                     IMAGEFOLDER);
                                         else
-                                            cameraFolder = MainActivity.this.getCacheDir();
+                                            cameraFolder = PicassoActivity.this.getCacheDir();
                                         if (!cameraFolder.exists())
                                             cameraFolder.mkdirs();
 
@@ -124,18 +125,22 @@ public class MainActivity extends ActionBarActivity {
             switch (requestCode) {
                 case GALLERY:
                     Uri selectedImage = data.getData();
-                    imageView.setImageURI(selectedImage);
+                    Picasso.with(context)
+                            .load(selectedImage)
+                            .into(imageView);
 
                     break;
                 case CAMERA:
-
-                    imageView.setImageURI(imageURI);
+                    Picasso.with(context)
+                            .load(imageURI)
+                            .into(imageView);
                     break;
             }
 
         }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,5 +172,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
