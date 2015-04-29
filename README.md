@@ -1,5 +1,7 @@
 # Samsung-S4-ImageView-Test
-This Git Repo has been created to figure out why an ImageView will not load a picture from the camera or gallery when ran on a Samsung Galaxy S4, but the same code works on other Android devices.
+This Git Repo has been created to figure out why an ImageView will not load a picture from the camera or gallery when ran on a Samsung Galaxy S4 and S5, but the same code works on other Android devices.
+
+##Also Happens on Samsung S5 running Android 5.0
 
 #Solved
 
