@@ -126,12 +126,14 @@ public class PicassoActivity extends ActionBarActivity {
                     Uri selectedImage = data.getData();
                     Picasso.with(context)
                             .load(selectedImage)
+                            .fit()
                             .into(imageView);
 
                     break;
                 case CAMERA:
                     Picasso.with(context)
                             .load(imageURI)
+                            .fit()
                             .into(imageView);
                     break;
             }
