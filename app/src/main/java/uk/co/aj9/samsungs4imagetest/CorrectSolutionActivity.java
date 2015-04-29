@@ -4,25 +4,28 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class PicassoActivity extends ActionBarActivity {
+public class CorrectSolutionActivity extends ActionBarActivity {
     //Views
 
     Button btn;
@@ -80,12 +83,12 @@ public class PicassoActivity extends ActionBarActivity {
                                         File cameraFolder;
 
                                         //Check to see if there is an SD card mounted
-                                        if (android.os.Environment.getExternalStorageState().equals
-                                                (android.os.Environment.MEDIA_MOUNTED))
-                                            cameraFolder = new File(android.os.Environment.getExternalStorageDirectory(),
+                                        if (Environment.getExternalStorageState().equals
+                                                (Environment.MEDIA_MOUNTED))
+                                            cameraFolder = new File(Environment.getExternalStorageDirectory(),
                                                     IMAGEFOLDER);
                                         else
-                                            cameraFolder = PicassoActivity.this.getCacheDir();
+                                            cameraFolder = CorrectSolutionActivity.this.getCacheDir();
                                         if (!cameraFolder.exists())
                                             cameraFolder.mkdirs();
 
@@ -123,21 +126,60 @@ public class PicassoActivity extends ActionBarActivity {
 
             switch (requestCode) {
                 case GALLERY:
-                    Uri selectedImage = data.getData();
-                    Picasso.with(context)
-                            .load(selectedImage)
-                            .into(imageView);
-
+                    Bitmap bitmap = createScaledBitmap(getImagePath(data, getApplicationContext()), imageView.getWidth(), imageView.getHeight());
+                    imageView.setImageBitmap(bitmap);
                     break;
                 case CAMERA:
-                    Picasso.with(context)
-                            .load(imageURI)
-                            .into(imageView);
+                    String path = imageURI.getPath();
+                    Bitmap bitmapCamera = createScaledBitmap(path, imageView.getWidth(), imageView.getHeight());
+                    imageView.setImageBitmap(bitmapCamera);
                     break;
             }
 
         }
 
+    }
+
+    // Function to get image path from ImagePicker
+    public static String getImagePath(Intent data, Context context) {
+        Uri selectedImage = data.getData();
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+        return picturePath;
+    }
+
+
+    public Bitmap createScaledBitmap(String pathName, int width, int height) {
+        final BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(pathName, opt);
+        opt.inSampleSize = calculateBmpSampleSize(opt, width, height);
+        opt.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(pathName, opt);
+    }
+
+    public int calculateBmpSampleSize(BitmapFactory.Options opt, int width, int height) {
+        final int outHeight = opt.outHeight;
+        final int outWidth = opt.outWidth;
+        int sampleSize = 1;
+        if (outHeight > height || outWidth > width) {
+            final int heightRatio = Math.round((float) outHeight / (float) height);
+            final int widthRatio = Math.round((float) outWidth / (float) width);
+            sampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return sampleSize;
+    }
+    /*
+        * Function to determine the dimensions of the target device display
+        */
+    public DisplayMetrics getScreenDimensions() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics;
     }
 
 

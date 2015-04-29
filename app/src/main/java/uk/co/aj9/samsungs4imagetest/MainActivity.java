@@ -1,6 +1,5 @@
 package uk.co.aj9.samsungs4imagetest;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -166,6 +165,12 @@ public class MainActivity extends ActionBarActivity {
         }
         else if(id == R.id.bitmapActivity){
             Intent intent = new Intent(this, BitmapActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        else if(id == R.id.correctSolutionActivitiy){
+            Intent intent = new Intent(this, CorrectSolutionActivity.class);
             startActivity(intent);
             finish();
             return true;

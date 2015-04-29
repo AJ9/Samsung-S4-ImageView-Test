@@ -8,4 +8,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/bitmapActivity" android:title="Bitmap Activity"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/correctSolutionActivitiy" android:title="Correct Solution"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

@@ -17,8 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -179,6 +177,12 @@ public class BitmapActivity extends ActionBarActivity {
         }
         else if(id == R.id.bitmapActivity){
             Intent intent = new Intent(this, BitmapActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        else if(id == R.id.correctSolutionActivitiy){
+            Intent intent = new Intent(this, CorrectSolutionActivity.class);
             startActivity(intent);
             finish();
             return true;

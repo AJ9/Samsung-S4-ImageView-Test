@@ -28,6 +28,10 @@
             android:name=".BitmapActivity"
             android:label="@string/title_activity_bitmap" >
         </activity>
+        <activity
+        android:name=".CorrectSolutionActivity"
+        android:label="Correct Solution" >
+    </activity>
     </application>
 
 </manifest>
