@@ -24,6 +24,10 @@
             android:name=".PicassoActivity"
             android:label="@string/title_activity_picasso" >
         </activity>
+        <activity
+            android:name=".BitmapActivity"
+            android:label="@string/title_activity_bitmap" >
+        </activity>
     </application>
 
 </manifest>

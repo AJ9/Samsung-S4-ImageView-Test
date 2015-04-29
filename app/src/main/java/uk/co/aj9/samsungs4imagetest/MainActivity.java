@@ -164,6 +164,12 @@ public class MainActivity extends ActionBarActivity {
             finish();
             return true;
         }
+        else if(id == R.id.bitmapActivity){
+            Intent intent = new Intent(this, BitmapActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

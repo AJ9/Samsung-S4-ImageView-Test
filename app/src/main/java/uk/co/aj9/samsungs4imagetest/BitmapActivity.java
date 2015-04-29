@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -13,17 +15,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class PicassoActivity extends ActionBarActivity {
+public class BitmapActivity extends ActionBarActivity {
     //Views
 
     Button btn;
@@ -86,7 +88,7 @@ public class PicassoActivity extends ActionBarActivity {
                                             cameraFolder = new File(android.os.Environment.getExternalStorageDirectory(),
                                                     IMAGEFOLDER);
                                         else
-                                            cameraFolder = PicassoActivity.this.getCacheDir();
+                                            cameraFolder = BitmapActivity.this.getCacheDir();
                                         if (!cameraFolder.exists())
                                             cameraFolder.mkdirs();
 
@@ -125,15 +127,21 @@ public class PicassoActivity extends ActionBarActivity {
             switch (requestCode) {
                 case GALLERY:
                     Uri selectedImage = data.getData();
-                    Picasso.with(context)
-                            .load(selectedImage)
-                            .into(imageView);
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(selectedImage));
+                        imageView.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
 
                     break;
                 case CAMERA:
-                    Picasso.with(context)
-                            .load(imageURI)
-                            .into(imageView);
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(imageURI));
+                        imageView.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
 

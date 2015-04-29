@@ -1,9 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="uk.co.aj9.samsungs4imagetest.PicassoActivity">
+    tools:context="uk.co.aj9.samsungs4imagetest.BitmapActivity">
     <item android:id="@+id/mainActivity" android:title="Main Activity"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/picassoActivity" android:title="Picasso Activity"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/bitmapActivity" android:title="Bitmap Activity"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
