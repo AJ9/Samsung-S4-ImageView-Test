@@ -3,7 +3,7 @@ This Git Repo has been created to figure out why an ImageView will not load a pi
 
 #Solved
 
-Turns out any images taken from the Samsung S4 camera are too large to be handled by the device. 
+Turns out any images taken from the Samsung S4 camera are too large to be handled by the device. Discussed on [Stack Overflow](http://stackoverflow.com/questions/29932060/imageview-will-not-load-via-setimageuri-when-ran-on-samsung-galaxy-s4-only/)
 
 ##Correct solution: 
 
