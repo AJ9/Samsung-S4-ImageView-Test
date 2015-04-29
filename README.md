@@ -80,6 +80,8 @@ Picasso.with(context)
 
 ```
 
+![Picasso Fix](http://i.imgur.com/QFAjSiZ.png "Picasso Fix")
+
 #Problem
 
 Initial code:
