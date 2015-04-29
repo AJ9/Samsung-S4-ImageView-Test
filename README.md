@@ -67,6 +67,19 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 ```
 
+##Picasso solution: 
+
+An additional ".fit()" method was needed.
+
+```Java
+
+Picasso.with(context)
+    .load(imageURI)
+    .fit()
+    .into(imageView);
+
+```
+
 #Problem
 
 Initial code:
