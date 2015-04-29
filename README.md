@@ -98,7 +98,10 @@ try {
     e.printStackTrace();
 }
 ```
+But the bitmap does correctly load in the debugger:
+![Debugger Bitmap](http://i.imgur.com/TSXBkcj.png "Bitmap loads in the debugger") 
 
+[Full Size Image](http://i.imgur.com/Ls8Q0qh.jpg "Bitmap loads in the debugger")
 
 
 
